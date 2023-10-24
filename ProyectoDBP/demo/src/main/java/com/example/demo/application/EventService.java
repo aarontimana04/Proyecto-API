@@ -3,9 +3,7 @@ package com.example.demo.application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.application.dto.EventDTO;
-import com.example.demo.domain.model.Event;
-import com.example.demo.domain.repository.EventRepository;
+import java.util.List;
 
 @Service
 public class EventService {
@@ -13,16 +11,18 @@ public class EventService {
     @Autowired
     private EventRepository eventRepository;
 
-    public void createEvent(EventDTO eventDTO) {
-        Event event = // Convertir EventDTO a Event y asignar valores
-        eventRepository.save(event);
+    public List<Event> getAllEvents() {
+        return eventRepository.findAll();
     }
 
-    public EventDTO getEventById(Long eventId) {
-        Event event = // Obtener evento por ID desde el repositorio
-        return // Convertir Event a EventDTO;
+    public Event getEventById(Long id) {
+        return eventRepository.findById(id).orElse(null);
     }
 
-    // Otros métodos para actualizar, eliminar y obtener eventos
+    public Event createEvent(Event event) {
+        // Puedes agregar lógica de validación u otras operaciones antes de guardar el evento
+        return eventRepository.save(event);
+    }
 
+    // Otros métodos según sea necesario
 }

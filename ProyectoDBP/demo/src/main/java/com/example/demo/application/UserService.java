@@ -3,9 +3,7 @@ package com.example.demo.application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.application.dto.UserDTO;
-import com.example.demo.domain.model.User;
-import com.example.demo.domain.repository.UserRepository;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -13,16 +11,18 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public void createUser(UserDTO userDTO) {
-        User user = // Convertir UserDTO a User y asignar valores
-        userRepository.save(user);
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
-    public UserDTO getUserById(Long userId) {
-        User user = // Obtener usuario por ID desde el repositorio
-        return // Convertir User a UserDTO;
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 
-    // Otros métodos para actualizar, eliminar y obtener usuarios
+    public User createUser(User user) {
+        // Puedes agregar lógica de validación u otras operaciones antes de guardar el usuario
+        return userRepository.save(user);
+    }
 
+    // Otros métodos según sea necesario
 }

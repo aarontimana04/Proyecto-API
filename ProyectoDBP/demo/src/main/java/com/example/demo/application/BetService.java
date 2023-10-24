@@ -3,9 +3,7 @@ package com.example.demo.application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.application.dto.BetDTO;
-import com.example.demo.domain.model.Bet;
-import com.example.demo.domain.repository.BetRepository;
+import java.util.List;
 
 @Service
 public class BetService {
@@ -13,16 +11,18 @@ public class BetService {
     @Autowired
     private BetRepository betRepository;
 
-    public void placeBet(BetDTO betDTO) {
-        Bet bet = // Convertir BetDTO a Bet y asignar valores
-        betRepository.save(bet);
+    public List<Bet> getAllBets() {
+        return betRepository.findAll();
     }
 
-    public BetDTO getBetById(Long betId) {
-        Bet bet = // Obtener apuesta por ID desde el repositorio
-        return // Convertir Bet a BetDTO;
+    public Bet getBetById(Long id) {
+        return betRepository.findById(id).orElse(null);
     }
 
-    // Otros métodos para actualizar, eliminar y obtener apuestas
+    public Bet createBet(Bet bet) {
+        // Puedes agregar lógica de validación u otras operaciones antes de guardar la apuesta
+        return betRepository.save(bet);
+    }
 
+    // Otros métodos según sea necesario
 }
